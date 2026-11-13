@@ -35,7 +35,7 @@ def load_csv(path_or_buffer) -> pd.DataFrame:
     df = df.dropna(how="all").reset_index(drop=True)
 
     for col in df.columns:
-        df[col] = pd.to_numeric(df[col], errors="ignore")
+        df[col] = pd.to_numeric(df[col], errors="coerce")
 
     if not any(pd.api.types.is_numeric_dtype(df[c]) for c in df.columns):
         raise ValueError("No numeric columns found in the file.")
